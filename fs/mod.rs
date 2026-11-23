@@ -362,6 +362,10 @@ pub mod c {
     #[cfg(kernel)]
     #[cfg(not(linux_ge = "6.17"))]
     pub use self::system_unbound_wq as system_dfl_wq;
+    // And system_percpu_wq, system_wq before 6.17.
+    #[cfg(kernel)]
+    #[cfg(not(linux_ge = "6.17"))]
+    pub use self::system_wq as system_percpu_wq;
 
     impl bch_sb_field_crypt {
         pub fn key(&self) -> &bch_encrypted_key {

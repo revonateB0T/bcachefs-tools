@@ -353,7 +353,7 @@ impl<T: RcuRealloc, A: Alloc> Armed<'_, T, A> {
         let p = unsafe { self.0.as_ref() };
         let pending = unsafe { &*p.parent };
 
-        unsafe { Queue::system().queue_work_on(p.cpu, p.work.as_ptr()) };
+        unsafe { Queue::system_percpu().queue_work_on(p.cpu, p.work.as_ptr()) };
 
         let mut s = p.lock.lock();
         if s.has_pending() {
